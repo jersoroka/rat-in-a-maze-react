@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* Variables */
+
+/* :root {
+
+} */
+
+/* Global Styles */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Global Classes */
+

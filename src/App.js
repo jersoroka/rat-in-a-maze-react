@@ -1,10 +1,13 @@
+import Grid from './components/Grid';
 import './App.css';
 
 function App() {
   return (
-    <div>
-
-    </div>
+    <main>
+      <section className="container">
+        <Grid/>
+      </section>
+    </main>
   );
 }
 
