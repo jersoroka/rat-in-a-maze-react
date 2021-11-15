@@ -1,10 +1,13 @@
 import React from 'react';
 import './Square.css';
 
-export default function Square({ colour }) {
+export default function Square({ colour, index }) {
+
     return (
         <div className="square" style={{ background: colour }}>
-            Hello, world!
+            {index}
+            {index === 1 && <div>rat</div>}
+            {index === 25 && <div>cheese</div>}
         </div>
     )
 }
