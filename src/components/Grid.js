@@ -4,24 +4,39 @@ import Square from './Square.js';
 
 export default function Grid() {
     const [cellsPerRow, setCellsPerRow] = useState(5);
-    const [squares, setSquares] = useState(generateSquares());
+    // change to set grid probably
+    const [grid, setGrid] = useState(generateGrid());
 
-    function generateSquares() {
-        let gridSquares = [];
-
-        for (let index = 1; index <= cellsPerRow * cellsPerRow; index++) { 
-            if (index === 7 || index === 9) {
-                gridSquares.push(<Square colour="crimson" index={index} />)
-            } else {
-                gridSquares.push(<Square colour="orange" index={index}/>);
+    function generateGrid() {
+        let gridRows = [];
+        for (let row = 0; row < cellsPerRow; row++) { 
+            let rowArray = [];
+            for (let column = 1; column <= cellsPerRow; column++) {
+                const index = (cellsPerRow * row) + column;
+                // TODO: this isWall is temporary - will be changed to something user-defined later
+                const isWall = ((index >= 6 && index <= 9) || (index === 14) || (index === 19) || (index === 24))
+                rowArray.push({
+                    key: index,
+                    isMazeWall: isWall,
+                    index: index
+                })
             }
+            gridRows.push(rowArray);
         }
-        return gridSquares;
+        return gridRows;
     }
+
+    
+
+    // this initial generateGrid can probably be abstracted. You only need access to cellsPerRow, squares
 
     return (
         <div className="grid">
-            {squares}
+            {grid.map(row => {
+                return row.map(square => {
+                    return <Square key={square.index} isMazeWall={square.isMazeWall} index={square.index}/>
+                })
+            })}
         </div>
     )
 }

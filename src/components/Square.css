@@ -1,5 +1,13 @@
+.path {
+    background: orange;
+}
+
 .square {
     width: 20%;
     height: 20%;
     outline: 1px solid black;
+}
+
+.wall {
+    background: crimson;
 }
