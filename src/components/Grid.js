@@ -25,18 +25,16 @@ export default function Grid() {
         }
         return gridRows;
     }
-
     
-
-    // this initial generateGrid can probably be abstracted. You only need access to cellsPerRow, squares
+    const renderedSquares = grid.map(row => {
+        return row.map(square => {
+            return <Square key={square.index} isMazeWall={square.isMazeWall} index={square.index}/>;
+        })
+    });
 
     return (
         <div className="grid">
-            {grid.map(row => {
-                return row.map(square => {
-                    return <Square key={square.index} isMazeWall={square.isMazeWall} index={square.index}/>
-                })
-            })}
+            {renderedSquares}
         </div>
     )
 }
