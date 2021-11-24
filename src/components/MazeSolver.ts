@@ -20,4 +20,21 @@ export function solveMazeHelper(maze: number[][], x: number, y: number, solMaze:
     }
 
     return false;
-}
+};
+
+export function solveMaze(maze: number[][]): (number[][] | false) {
+    let solMaze: number[][] = [];
+    for (let i = 0; i < maze.length; i++) {
+        let row: number[] = []
+        for (let j = 0; j < maze.length; j++) {
+            row.push(0);
+        };
+        solMaze.push(row);
+    };
+
+    if (!solveMazeHelper(maze, 0, 0, solMaze as number[][])) {
+        return false;
+    };
+    
+    return solMaze as number[][];
+};

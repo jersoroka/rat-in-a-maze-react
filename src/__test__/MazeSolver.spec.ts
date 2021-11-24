@@ -1,4 +1,4 @@
-import { isValidPos, solveMazeHelper } from '../components/MazeSolver';
+import { isValidPos, solveMaze, solveMazeHelper } from '../components/MazeSolver';
 
 describe('Maze solver helper functions', () => {
     const maze5x5: number[][] = [
@@ -96,4 +96,14 @@ describe('Maze solver helper functions', () => {
             expect(initialSol5x5).toEqual(solvedMaze5x5);
         });
     });
+
+    describe('solveMaze', () => {
+        fit('should return false if the maze is unsolvable', () => {
+            expect(solveMaze(maze5x5WithNoSol)).toBeFalsy();
+        });
+
+        fit('should return a completed maze if solvable', () => {
+            expect(solveMaze(maze5x5)).toEqual(solvedMaze5x5);
+        });
+    })
 })
