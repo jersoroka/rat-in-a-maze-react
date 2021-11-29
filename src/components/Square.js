@@ -20,8 +20,6 @@ export default function Square({square}) {
                     height: mazeLength}}
             onClick={() => handleClick()}>
             {id}
-            {id === 1 && <div>rat</div>}
-            {id === 25 && <div>cheese</div>}
         </div>
     )
 }
