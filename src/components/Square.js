@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
+import { useContext } from 'react';
 import './Square.css';
+import { GlobalContext } from '../context/GlobalState';
 
-export default function Square({ index, isMazeWall }) {
-    const [isWall, setIsWall] = useState(isMazeWall);
+export default function Square({square}) {
+    const { isMazeWall, id, pos} = square;
+    const { setSquareType } = useContext(GlobalContext);
 
     function handleClick() {
-        if (index !== 1) {
-            setIsWall(!isWall);
-            // some function that changes the square object itself
+        if (id !== 1) {
+            setSquareType(pos)
         }
     }
 
     return (
         <div 
-            className={`square ${isWall ? 'wall' : 'path'}`}
+            className={`square ${isMazeWall ? 'wall' : 'path'}`}
             onClick={() => handleClick()}>
-            {index}
-            {index === 1 && <div>rat</div>}
-            {index === 25 && <div>cheese</div>}
+            {id}
+            {id === 1 && <div>rat</div>}
+            {id === 25 && <div>cheese</div>}
         </div>
     )
 }
