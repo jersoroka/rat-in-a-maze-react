@@ -33,12 +33,23 @@ export const GlobalProvider = ({ children }) => {
 
             }
         })
-    }
+    };
 
+    function solveMaze() {
+        dispatch({
+            type: 'SOLVE_MAZE',
+            payload: {
+                grid: state.grid
+            }
+        })
+    };
+    console.log(state.grid)
     return (
         <GlobalContext.Provider value={{
         grid: state.grid,
-        setIsMazeWall
+        setIsMazeWall,
+        // setMazeLength,
+        solveMaze
     }}>
         {children}
     </GlobalContext.Provider>)
