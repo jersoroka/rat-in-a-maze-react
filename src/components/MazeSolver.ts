@@ -1,10 +1,10 @@
 import { Square } from '../types';
 
-export function isValidPos(maze: number[][], x: number, y: number): boolean {
-    return (x >= 0 && x < maze.length && y >= 0 && y < maze.length && maze[x][y] === 1)
+export function isValidPos(maze: Square[][], x: number, y: number): boolean {
+    return (x >= 0 && x < maze.length && y >= 0 && y < maze.length && !maze[x][y].isMazeWall)
 };
 
-export function solveMazeHelper(maze: number[][], x: number, y: number, solMaze: number[][]): boolean {
+export function solveMazeHelper(maze: Square[][], x: number, y: number, solMaze: number[][]): boolean {
     if (x == maze.length - 1 && y == maze.length - 1) {
         solMaze[x][y] = 1;
         return true;
@@ -13,7 +13,7 @@ export function solveMazeHelper(maze: number[][], x: number, y: number, solMaze:
     if (isValidPos(maze, x, y) && solMaze[x][y] != 1) {
         solMaze[x][y] = 1;
 
-        if ( solveMazeHelper(maze, x + 1, y, solMaze) || solveMazeHelper(maze, x, y + 1, solMaze) 
+        if (solveMazeHelper(maze, x + 1, y, solMaze) || solveMazeHelper(maze, x, y + 1, solMaze) 
         ) {
             return true;
         }
@@ -24,7 +24,7 @@ export function solveMazeHelper(maze: number[][], x: number, y: number, solMaze:
     return false;
 };
 
-export function solveMaze(maze: number[][]): (number[][] | false) {
+export function solveMaze(maze: Square[][]): (number[][] | false) {
     let solMaze: number[][] = [];
     for (let i = 0; i < maze.length; i++) {
         let row: number[] = []
@@ -37,6 +37,6 @@ export function solveMaze(maze: number[][]): (number[][] | false) {
     if (!solveMazeHelper(maze, 0, 0, solMaze as number[][])) {
         return false;
     };
-    
+    // add another helper function which reduces the orginal maze and solmaze into a square[][] object with isRoute property
     return solMaze as number[][];
 };

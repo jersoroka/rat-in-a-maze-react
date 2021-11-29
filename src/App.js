@@ -1,17 +1,18 @@
+import { useContext } from 'react';
 import Grid from './components/Grid';
 import './App.css';
-
-import { GlobalProvider } from './context/GlobalState';
+import { GlobalContext } from './context/GlobalState';
 
 function App() {
+  const { solveMaze } = useContext(GlobalContext);
+
   return (
-    <GlobalProvider>
       <main>
         <section className="container">
           <Grid/>
+          <button onClick={() => solveMaze()}>Solve</button>
         </section>
       </main>
-    </GlobalProvider>
   );
 }
 
