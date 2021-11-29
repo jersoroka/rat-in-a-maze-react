@@ -6,5 +6,6 @@ export interface Position {
 export interface Square {
     id: number,
     pos: Position,
-    isMazeWall: boolean
+    isMazeWall: boolean,
+    isRoute?: boolean
 }
