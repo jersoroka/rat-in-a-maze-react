@@ -4,17 +4,20 @@ import { GlobalContext } from '../context/GlobalState';
 
 export default function Square({square}) {
     const { isMazeWall, id, pos} = square;
-    const { setSquareType } = useContext(GlobalContext);
+    const { grid, setIsMazeWall } = useContext(GlobalContext);
+    let mazeLength = ((1 / (grid.length)) * 100).toFixed(2) + '%';
 
     function handleClick() {
         if (id !== 1) {
-            setSquareType(pos)
+            setIsMazeWall(pos)
         }
     }
 
     return (
         <div 
             className={`square ${isMazeWall ? 'wall' : 'path'}`}
+            style={{width: mazeLength, 
+                    height: mazeLength}}
             onClick={() => handleClick()}>
             {id}
             {id === 1 && <div>rat</div>}

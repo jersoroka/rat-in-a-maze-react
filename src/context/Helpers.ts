@@ -1,11 +1,11 @@
 import { Square } from '../types';
 
-export function generateInitialGrid(): Square[][] {
+export function generateGrid(length: number): Square[][] {
     let gridRows = [];
-    for (let row = 0; row < 5; row++) { 
+    for (let row = 0; row < length; row++) { 
         let rowArray = [];
-        for (let column = 0; column < 5; column++) {
-            const index = (5 * row) + column + 1;
+        for (let column = 0; column < length; column++) {
+            const index = (length * row) + column + 1;
             rowArray.push({
                 id: index,
                 pos: {

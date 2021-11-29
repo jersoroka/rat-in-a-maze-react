@@ -1,10 +1,10 @@
 import { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
-import { generateInitialGrid } from './Helpers';
+import { generateGrid } from './Helpers';
 
 // Initial state
 const initialState = {
-    grid: generateInitialGrid()
+    grid: generateGrid(10)
 };
 
 // Create context
@@ -15,7 +15,7 @@ export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
     // Actions
-    function setSquareType(pos) {
+    function setIsMazeWall(pos) {
         const {row, column} = pos;
         dispatch({
             type: 'SET_SQUARE_TYPE',
@@ -24,11 +24,21 @@ export const GlobalProvider = ({ children }) => {
                 column: column
             }
         });
+    };
+
+    function setMazeLength(length) {
+        dispatch({
+            type: 'SET_MAZE_LENGTH',
+            payload: {
+
+            }
+        })
     }
+
     return (
         <GlobalContext.Provider value={{
         grid: state.grid,
-        setSquareType
+        setIsMazeWall
     }}>
         {children}
     </GlobalContext.Provider>)
