@@ -13,13 +13,15 @@ export default function Square({square}) {
         }
     }
 
+    let squareColour = isRoute ? 'solpath' : (isMazeWall ? 'wall' : 'path');
+
     return (
         <div 
-            className={`square ${isMazeWall ? 'wall' : 'path'}`}
+            className={`square ${squareColour}`}
             style={{width: mazeLength, 
                     height: mazeLength}}
-            onClick={() => handleClick()}>
-            {id}
+            onClick={() => handleClick()}
+            onDragEnter={() => handleClick()}>
         </div>
     )
 }
