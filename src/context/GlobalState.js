@@ -15,6 +15,12 @@ export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
     // Actions
+    function restartMaze() {
+        dispatch({
+            type: 'RESTART_MAZE'
+        })
+    }
+
     function setIsMazeWall(pos) {
         const {row, column} = pos;
         dispatch({
@@ -30,25 +36,22 @@ export const GlobalProvider = ({ children }) => {
         dispatch({
             type: 'SET_MAZE_LENGTH',
             payload: {
-
+                length: length
             }
         })
     };
 
     function solveMaze() {
         dispatch({
-            type: 'SOLVE_MAZE',
-            payload: {
-                grid: state.grid
-            }
+            type: 'SOLVE_MAZE'
         })
     };
-    console.log(state.grid)
     return (
         <GlobalContext.Provider value={{
         grid: state.grid,
         setIsMazeWall,
-        // setMazeLength,
+        setMazeLength,
+        restartMaze,
         solveMaze
     }}>
         {children}
