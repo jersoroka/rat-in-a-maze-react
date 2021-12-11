@@ -3,7 +3,7 @@ import './Square.css';
 import { GlobalContext } from '../context/GlobalState';
 
 export default function Square({square}) {
-    const { isMazeWall, id, pos} = square;
+    const { isMazeWall, isRoute, id, pos} = square;
     const { grid, setIsMazeWall } = useContext(GlobalContext);
     let mazeLength = ((1 / (grid.length)) * 100).toFixed(2) + '%';
 
