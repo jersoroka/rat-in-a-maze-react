@@ -6,10 +6,6 @@ import { GlobalContext } from './context/GlobalState';
 function App() {
   const { restartMaze, solveMaze } = useContext(GlobalContext);
 
-  useEffect(() => {
-    setMazeLength(length);
-  }, [length])
-
   return (
       <main>
         <section className="container">
