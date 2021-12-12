@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer, useState } from 'react';
 import AppReducer from './AppReducer';
 import { generateGrid } from './Helpers';
 
@@ -13,6 +13,7 @@ export const GlobalContext = createContext(initialState);
 // Provider component
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
+    const [isDragMode, setIsDragMode] = useState(false);
 
     // Actions
     function restartMaze() {
@@ -52,7 +53,9 @@ export const GlobalProvider = ({ children }) => {
         setIsMazeWall,
         setMazeLength,
         restartMaze,
-        solveMaze
+        solveMaze,
+        setIsDragMode,
+        isDragMode
     }}>
         {children}
     </GlobalContext.Provider>)

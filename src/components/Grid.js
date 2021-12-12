@@ -4,7 +4,7 @@ import Square from './Square.js';
 import { GlobalContext } from '../context/GlobalState';
 
 export default function Grid() {
-    const { grid } = useContext(GlobalContext);
+    const { grid, setIsDragMode } = useContext(GlobalContext);
     
     
     const renderedSquares = grid.map(row => {
@@ -14,7 +14,8 @@ export default function Grid() {
     });
 
     return (
-        <div className="grid">
+        <div className="grid"
+        onMouseLeave={() => setIsDragMode(false)}>
             {renderedSquares}
         </div>
     )
