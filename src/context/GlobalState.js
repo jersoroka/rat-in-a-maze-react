@@ -4,7 +4,7 @@ import { generateGrid } from './Helpers';
 
 // Initial state
 const initialState = {
-    grid: generateGrid(30)
+    grid: generateGrid(20)
 };
 
 // Create context
