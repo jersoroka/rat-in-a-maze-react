@@ -4,7 +4,7 @@ import { generateGrid } from './Helpers';
 
 // Initial state
 const initialState = {
-    grid: generateGrid(10)
+    grid: generateGrid(30)
 };
 
 // Create context
@@ -33,15 +33,6 @@ export const GlobalProvider = ({ children }) => {
         });
     };
 
-    function setMazeLength(length) {
-        dispatch({
-            type: 'SET_MAZE_LENGTH',
-            payload: {
-                length: length
-            }
-        })
-    };
-
     function solveMaze() {
         dispatch({
             type: 'SOLVE_MAZE'
@@ -51,7 +42,6 @@ export const GlobalProvider = ({ children }) => {
         <GlobalContext.Provider value={{
         grid: state.grid,
         setIsMazeWall,
-        setMazeLength,
         restartMaze,
         solveMaze,
         setIsDragMode,

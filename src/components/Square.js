@@ -21,7 +21,6 @@ export default function Square({square}) {
             className={`square ${squareColour}`}
             style={{width: mazeLength, 
                     height: mazeLength}}
-            // onDragEnter={() => handleClick()}
             onMouseDown={(e) => {
                 e.preventDefault();
                 setIsDragMode(true);
