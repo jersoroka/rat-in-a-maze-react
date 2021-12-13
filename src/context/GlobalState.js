@@ -52,12 +52,3 @@ export const GlobalProvider = ({ children }) => {
         {children}
     </GlobalContext.Provider>)
 }
-
-// export function animateMazeSolution(maze) { // FIXME: make this work somehow
-//     dispatch({
-//         type: `ANIMATE_MAZE_SOLUTION`,
-//         payload: {
-//             solMaze: maze
-//         }
-//     })
-// }

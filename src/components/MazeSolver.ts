@@ -1,6 +1,5 @@
 import { Square } from '../types';
 import {cloneDeep} from 'lodash';
-// import {animateMazeSolution} from '../context/GlobalState'
 
 export function isValidPos(maze: Square[][], x: number, y: number): boolean {
     return (x >= 0 && x < maze.length && y >= 0 && y < maze.length && !maze[x][y].isMazeWall)
@@ -10,7 +9,6 @@ export function solveMazeHelper(maze: Square[][], x: number, y: number, solMaze:
 
     if (x == maze.length - 1 && y == maze.length - 1) {
         solMaze[x][y].isRoute = true;
-        // animateMazeSolution(solMaze);
         return true;
     }
 
@@ -24,7 +22,6 @@ export function solveMazeHelper(maze: Square[][], x: number, y: number, solMaze:
 
         solMaze[x][y].isRoute = false;
     }
-    // TODO: add custom hook for updating maze before each return statement
     return false;
 };
 

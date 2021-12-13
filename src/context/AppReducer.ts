@@ -5,9 +5,6 @@ import { solveMaze } from '../components/MazeSolver';
 export default (state: any, action: any) => {
     let deepCopyState = cloneDeep(state);
     switch (action.type) {
-        case 'ANIMATE_MAZE_SOLUTION':
-            deepCopyState.grid = action.payload.solMaze;
-            return deepCopyState;
         case 'RESTART_MAZE':
             deepCopyState.grid = generateGrid(state.grid.length);
             return deepCopyState;
