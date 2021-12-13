@@ -5,7 +5,7 @@ import { GlobalContext } from '../context/GlobalState';
 export default function Square({square}) {
     const { isMazeWall, isRoute, id, pos} = square;
     const { grid, setIsMazeWall, isDragMode, setIsDragMode } = useContext(GlobalContext);
-    let mazeLength = ((1 / (grid.length)) * 100).toFixed(2) + '%'; // FIXME: change to a global constant somewhere
+    let mazeLength = ((1 / (grid.length)) * 100).toFixed(2) + '%';
 
     function handleEvent(e) {
         switch (e.type) {
@@ -24,7 +24,7 @@ export default function Square({square}) {
                 }
                 break;
         }
-    }
+    };
 
     let squareColour = isMazeWall ? 'wall' : (isRoute ? 'solpath' : 'path');
 
