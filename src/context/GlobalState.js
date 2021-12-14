@@ -33,14 +33,14 @@ export const GlobalProvider = ({ children }) => {
         });
     };
 
-    function setIsRoute(square) {
-        const {row, column} = square.pos;
+    function setIsRoute(pos, isRoute) {
+        const {row, column} = pos;
         dispatch({
             type: 'SET_IS_ROUTE',
             payload: {
                 row: row,
                 column: column,
-                isRoute: square.isRoute
+                isRoute: isRoute
             }
         })
     }
