@@ -19,3 +19,7 @@ export function generateGrid(length: number): Square[][] {
     }
     return gridRows;
 }
+
+export async function timer() {
+    return await new Promise(res => setTimeout(res, 1000));
+  }

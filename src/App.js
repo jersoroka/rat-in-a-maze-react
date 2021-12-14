@@ -4,6 +4,7 @@ import './App.css';
 import { GlobalContext } from './context/GlobalState';
 import { cloneDeep } from 'lodash';
 import { flushSync } from 'react-dom';
+import { timer } from './context/Helpers'
 
 function App() {
   const { grid, restartMaze, solveMaze, setIsRoute } = useContext(GlobalContext);
@@ -17,7 +18,8 @@ function App() {
       let square;
       square = cloneDeep(grid[i][i]);
       square.isRoute = true;
-      await new Promise(res => setTimeout(res, 1000))
+      // await new Promise(res => setTimeout(res, 1000))
+      await timer();
       // flushSync(() => setIsRoute(square.pos, square.isRoute));
       setIsRoute(square.pos, square.isRoute);
     }
