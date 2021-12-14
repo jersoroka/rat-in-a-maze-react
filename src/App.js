@@ -18,21 +18,9 @@ function App() {
       let square;
       square = cloneDeep(grid[i][i]);
       square.isRoute = true;
-      // await new Promise(res => setTimeout(res, 1000))
       await timer();
-      // flushSync(() => setIsRoute(square.pos, square.isRoute));
       setIsRoute(square.pos, square.isRoute);
     }
-
-    // let square;
-    // square = cloneDeep(grid[0][0]);
-    // square.isRoute = true;
-    // flushSync(() => setIsRoute(square))
-
-    // square = cloneDeep(grid[1][1]);
-    // square.isRoute = true;
-    // flushSync(() => setIsRoute(square))
-    
   }
 
   return (
