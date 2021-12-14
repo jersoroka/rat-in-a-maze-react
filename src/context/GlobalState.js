@@ -56,6 +56,7 @@ export const GlobalProvider = ({ children }) => {
         grid: state.grid,
         // animateMazeSolution,
         setIsMazeWall,
+        setIsRoute,
         restartMaze,
         solveMaze,
         setIsDragMode,
