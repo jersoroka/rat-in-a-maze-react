@@ -33,6 +33,18 @@ export const GlobalProvider = ({ children }) => {
         });
     };
 
+    function setIsRoute(square) {
+        const {row, column} = square.pos;
+        dispatch({
+            type: 'SET_IS_ROUTE',
+            payload: {
+                row: row,
+                column: column,
+                isRoute: square.isRoute
+            }
+        })
+    }
+
     function solveMaze() {
         dispatch({
             type: 'SOLVE_MAZE'
