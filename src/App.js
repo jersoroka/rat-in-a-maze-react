@@ -3,7 +3,6 @@ import Grid from './components/Grid';
 import './App.css';
 import { GlobalContext } from './context/GlobalState';
 import { cloneDeep } from 'lodash';
-import { flushSync } from 'react-dom';
 import { timer } from './context/Helpers'
 
 function App() {
@@ -13,23 +12,23 @@ function App() {
     console.log("changed")
   }, [grid])
 
-  async function toyColourChange() {
-    for (let i = 0; i < 5; i++) {
-      let square;
-      square = cloneDeep(grid[i][i]);
-      square.isRoute = true;
-      await timer();
-      setIsRoute(square.pos, square.isRoute);
-    }
-  }
+  // async function toyColourChange() {
+  //   for (let i = 0; i < 5; i++) {
+  //     let square;
+  //     square = cloneDeep(grid[i][i]);
+  //     square.isRoute = true;
+  //     await timer();
+  //     setIsRoute(square.pos, square.isRoute);
+  //   }
+  // }
 
   return (
       <main>
         <section className="container">
           <Grid/>
-          {/* <button onClick={() => solveMaze()}>Solve</button> */}
+          <button onClick={() => solveMaze()}>Solve</button>
           <button onClick={() => restartMaze()}>Restart</button>
-          <button onClick={(() => toyColourChange())}>Tester</button>
+          {/* <button onClick={(() => toyColourChange())}>Tester</button> */}
         </section>
       </main>
   );
