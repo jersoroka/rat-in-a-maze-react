@@ -54,7 +54,6 @@ export const GlobalProvider = ({ children }) => {
     return (
         <GlobalContext.Provider value={{
         grid: state.grid,
-        // animateMazeSolution,
         setIsMazeWall,
         setIsRoute,
         restartMaze,
