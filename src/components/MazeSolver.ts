@@ -5,7 +5,7 @@ export function isValidPos(maze: Square[][], x: number, y: number): boolean {
     return (x >= 0 && x < maze.length && y >= 0 && y < maze.length && !maze[x][y].isMazeWall)
 };
 
-export function solveMazeHelper(maze: Square[][], x: number, y: number, solMaze: Square[][]): boolean {
+export function solveMazeHelper(maze: Square[][], x: number, y: number, solMaze: Square[][], setIsRoute: (pos: {row: number, column: number}, isRoute: boolean) => void): boolean {
 
     if (x == maze.length - 1 && y == maze.length - 1) {
         solMaze[x][y].isRoute = true;
@@ -15,7 +15,7 @@ export function solveMazeHelper(maze: Square[][], x: number, y: number, solMaze:
     if (isValidPos(maze, x, y) && solMaze[x][y].isRoute != true) {
         solMaze[x][y].isRoute = true;
 
-        if (solveMazeHelper(maze, x + 1, y, solMaze) || solveMazeHelper(maze, x, y + 1, solMaze) 
+        if (solveMazeHelper(maze, x + 1, y, solMaze, setIsRoute) || solveMazeHelper(maze, x, y + 1, solMaze, setIsRoute) 
         ) {
             return true;
         }
@@ -33,7 +33,7 @@ export function solveMaze(maze: Square[][], setIsRoute: (pos: {row: number, colu
         });
     })
 
-    if (!solveMazeHelper(maze, 0, 0, solMaze)) {
+    if (!solveMazeHelper(maze, 0, 0, solMaze, setIsRoute)) {
         return false;
     };
     return solMaze;
