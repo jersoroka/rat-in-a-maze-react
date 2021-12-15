@@ -55,6 +55,11 @@ export const GlobalProvider = ({ children }) => {
         })
     };
 
+    // try moving solveMaze out of the dispatcher and into App.js
+    // make this entire set of functions async
+    // or
+    // refactor the entire dispatcher to be async/await
+
     return (
         <GlobalContext.Provider value={{
         grid: state.grid,
