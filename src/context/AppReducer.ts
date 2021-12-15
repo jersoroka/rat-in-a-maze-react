@@ -18,7 +18,7 @@ export default (state: any, action: any) => {
             square.isMazeWall = !square.isMazeWall
             return deepCopyState;
         case 'SOLVE_MAZE':
-            deepCopyState.grid = solveMaze(deepCopyState.grid);
+            deepCopyState.grid = solveMaze(deepCopyState.grid, action.payload.setIsRoute);
             return deepCopyState;
         default:
             return state;

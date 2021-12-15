@@ -47,7 +47,10 @@ export const GlobalProvider = ({ children }) => {
 
     function solveMaze() {
         dispatch({
-            type: 'SOLVE_MAZE'
+            type: 'SOLVE_MAZE',
+            payload: {
+                setIsRoute: setIsRoute
+            }
         })
     };
 

@@ -25,7 +25,7 @@ export function solveMazeHelper(maze: Square[][], x: number, y: number, solMaze:
     return false;
 };
 
-export function solveMaze(maze: Square[][]): (Square[][] | false) {
+export function solveMaze(maze: Square[][], setIsRoute: (pos: {row: number, column: number}, isRoute: boolean) => void): (Square[][] | false) {
     let solMaze = cloneDeep(maze);
     solMaze.forEach(row => {
         row.forEach(square => {
