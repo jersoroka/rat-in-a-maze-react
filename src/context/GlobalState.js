@@ -1,6 +1,6 @@
 import { createContext, useReducer, useState } from 'react';
 import AppReducer from './AppReducer';
-import { generateGrid } from './Helpers';
+import { generateGrid, timer } from './Helpers';
 
 // Initial state
 const initialState = {
@@ -33,7 +33,7 @@ export const GlobalProvider = ({ children }) => {
         });
     };
 
-    function setIsRoute(pos, isRoute) {
+    async function setIsRoute(pos, isRoute) {
         const {row, column} = pos;
         dispatch({
             type: 'SET_IS_ROUTE',
@@ -43,6 +43,7 @@ export const GlobalProvider = ({ children }) => {
                 isRoute: isRoute
             }
         })
+        await timer();
     }
 
     function solveMaze() {
