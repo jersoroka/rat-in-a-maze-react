@@ -24,3 +24,50 @@
     width: 50%;
     height: 50%;
 }
+
+.square-left {
+    background: green;
+    margin-right: auto;
+    width: 75%;
+    height: 50%;
+}
+
+.square-right {
+    background: green;
+    margin-left: auto;
+    width: 75%;
+    height: 50%;
+}
+
+.square-top {
+    background: green;
+    align-self: flex-start;
+    width: 50%;
+    height: 75%;
+}
+
+.square-bottom {
+    background: green;
+    align-self: flex-end;
+    width: 50%;
+    height: 75%;
+}
+
+.square-top-bottom {
+    background: green;
+    width: 50%;
+    height: 100%;
+}
+
+.square-left-right {
+    background: green;
+    width: 100%;
+    height: 50%;
+}
+
+.square-top-right {
+    background: green;
+    margin-left: auto;
+    width: 75%;
+    height: 50%;
+}
