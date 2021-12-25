@@ -23,6 +23,8 @@ export default function Square({square}) {
                     setIsMazeWall(pos);
                 }
                 break;
+            default:
+                break;
         }
     };
 

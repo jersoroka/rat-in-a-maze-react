@@ -46,27 +46,12 @@ export const GlobalProvider = ({ children }) => {
         await timer();
     }
 
-    function solveMaze() {
-        dispatch({
-            type: 'SOLVE_MAZE',
-            payload: {
-                setIsRoute: setIsRoute
-            }
-        })
-    };
-
-    // try moving solveMaze out of the dispatcher and into App.js
-    // make this entire set of functions async
-    // or
-    // refactor the entire dispatcher to be async/await
-
     return (
         <GlobalContext.Provider value={{
         grid: state.grid,
         setIsMazeWall,
         setIsRoute,
         restartMaze,
-        solveMaze,
         setIsDragMode,
         isDragMode
     }}>

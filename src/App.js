@@ -1,34 +1,18 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Grid from './components/Grid';
 import './App.css';
 import { GlobalContext } from './context/GlobalState';
-import { cloneDeep } from 'lodash';
-import { timer } from './context/Helpers'
+import { solveMaze } from './components/MazeSolver';
 
 function App() {
-  const { grid, restartMaze, solveMaze, setIsRoute } = useContext(GlobalContext);
-
-  useEffect(() => {
-    console.log("changed")
-  }, [grid])
-
-  // async function toyColourChange() {
-  //   for (let i = 0; i < 5; i++) {
-  //     let square;
-  //     square = cloneDeep(grid[i][i]);
-  //     square.isRoute = true;
-  //     await timer();
-  //     setIsRoute(square.pos, square.isRoute);
-  //   }
-  // }
+  const { grid, restartMaze, setIsRoute } = useContext(GlobalContext);
 
   return (
       <main>
         <section className="container">
           <Grid/>
-          <button onClick={() => solveMaze()}>Solve</button>
+          <button onClick={() => solveMaze(grid, setIsRoute)}>Solve</button>
           <button onClick={() => restartMaze()}>Restart</button>
-          {/* <button onClick={(() => toyColourChange())}>Tester</button> */}
         </section>
       </main>
   );

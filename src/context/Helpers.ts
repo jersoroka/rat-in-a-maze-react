@@ -21,5 +21,5 @@ export function generateGrid(length: number): Square[][] {
 }
 
 export async function timer() {
-    return await new Promise(res => setTimeout(res, 1000));
+    return await new Promise(res => setTimeout(res, 5));
   }
