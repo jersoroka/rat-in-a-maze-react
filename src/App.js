@@ -1,18 +1,14 @@
-import { useContext } from 'react';
 import Grid from './components/Grid';
 import './App.css';
-import { GlobalContext } from './context/GlobalState';
-import { solveMaze } from './components/MazeSolver';
+import Header from './components/Header';
 
 function App() {
-  const { grid, restartMaze, setIsRoute } = useContext(GlobalContext);
 
   return (
       <main>
         <section className="container">
+          <Header/>
           <Grid/>
-          <button onClick={() => solveMaze(grid, setIsRoute)}>Solve</button>
-          <button onClick={() => restartMaze()}>Restart</button>
         </section>
       </main>
   );

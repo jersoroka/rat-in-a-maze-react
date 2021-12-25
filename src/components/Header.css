@@ -1,0 +1,7 @@
+.header {
+    position: absolute;
+    top: 0vh;
+    width: var(--full-width);
+    display: flex;
+    justify-content: flex-start;
+}
