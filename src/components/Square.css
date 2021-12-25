@@ -1,17 +1,31 @@
 .path {
-    transition-duration: 0.05s;
-    background: orange;
+    background: var(--white);
 }
 
 .square {
-    outline: 1px solid black;
+    outline: 1px solid var(--blue);
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .wall {
     transition-duration: 0.05s;
-    background: crimson;
+    background: var(--wall);
+    outline: none;
 }
 
 .solpath {
-    background: green;
+    background: var(--purple);
+    outline: none;
+    /* border-radius: 5px; */
+}
+
+.inner {
+    /* top: 0px; */
+    width: 50%;
+    height: 50%;
+    /* background: black;
+    position: absolute; */
 }

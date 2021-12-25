@@ -1,7 +1,7 @@
 .grid {
     width: var(--full-width);
     height: var(--full-width);
-    border: 1px solid black;
+    border: 1px solid var(--blue);
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;

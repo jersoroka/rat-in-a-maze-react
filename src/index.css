@@ -3,6 +3,12 @@
 /* Variables */
 :root {
     --full-width: 80vmin;
+    --white: #FFFFFF;
+    --blue: #ADC6FF;
+    --green: #0EAD69;
+    --red: #D7816A;
+    --purple: #2F6690;
+    --wall: #DCC656;
 }
 
 /* :root {
@@ -17,6 +23,7 @@ body {
 
 main {
     min-height: 100vh;
+    min-width: 80vw;
     display: flex;
     justify-content: center;
     align-items: center;
