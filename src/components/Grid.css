@@ -1,4 +1,6 @@
 .grid {
+    position: absolute;
+    top: 8vh;
     width: var(--full-width);
     height: var(--full-width);
     border: 1px solid var(--blue);
