@@ -21,10 +21,15 @@ function Header() {
         }
     }
 
+    function resetMaze() {
+        setIsSolved(false);
+        restartMaze();
+    }
+
     return (
         <div className="header">
             <Button text={isSolved ? BUTTON_TEXT.CLEAR : BUTTON_TEXT.SOLVE} handleClick={() => completeMaze()}/>
-            <Button text={BUTTON_TEXT.RESET} handleClick={() => restartMaze()}/>
+            <Button text={BUTTON_TEXT.RESET} handleClick={() => resetMaze()}/>
             <Button text={BUTTON_TEXT.INFO_PANEL}/>
             <Button text={BUTTON_TEXT.GET_MAZE}/>
         </div>

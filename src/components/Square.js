@@ -37,14 +37,14 @@ export default function Square({square}) {
         <div className='square-grid'>
             <div className='square-grid-top'/>
             <div className='square-grid-center'
-                style={{'border-bottom-left-radius': '10px'}}/>
+                style={{'borderBottomLeftRadius': '10px'}}/>
             <div className='square-grid-right'/>
         </div>
     const stylingForSquareWithLeftAndBottomNeighbours = 
         <div className='square-grid'>
             <div className='square-grid-left'/>
             <div className='square-grid-center'
-                style={{'border-top-right-radius': '10px'}}/>
+                style={{'borderTopRightRadius': '10px'}}/>
             <div className='square-grid-bottom'/>
         </div>
     const ratStyling = <img src={rat} className='square-image' alt="Rat"/>;
