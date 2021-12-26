@@ -68,7 +68,29 @@ export default function Square({square}) {
         return isRoute && pos.row >= 0 && pos.row < grid.length - 1 && grid[pos.row + 1][pos.column].isRoute;
     }
 
+        const topRight = 
+        <div className='square-grid'>
+            <div className='square-grid-top'/>
+            <div className='square-grid-center square-grid-center-topRight-border'
+                style={{'border-bottom-left-radius': '10px'}}/>
+            <div className='square-grid-right'/>
+        </div>
+    const leftBottom = 
+        <div className='square-grid'>
+            <div className='square-grid-left'/>
+            <div className='square-grid-center'
+                style={{'border-top-right-radius': '10px'}}/>
+            <div className='square-grid-bottom'/>
+        </div>
+
     const adjacentRoute = findAdjacentRoutes();
+    const block = setBlock();
+
+    function setBlock() {
+        if (adjacentRoute === 'square-left-bottom') return leftBottom;
+        if (adjacentRoute === 'square-top-right') return topRight;
+        return <div className={`${adjacentRoute}`}/>;
+    }
 
     return (
         <div 
@@ -79,7 +101,7 @@ export default function Square({square}) {
             onMouseUp={(e) => handleEvent(e)}
             onMouseOver={(e) => handleEvent(e)}
             >
-                <div className={`${adjacentRoute}`}/>
+                {block}
         </div>
     )
 }
