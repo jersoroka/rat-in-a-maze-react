@@ -1,7 +1,7 @@
 import './Button.css';
 import {BUTTON_TEXT} from '../constants/enums'
 
-function Button({ text, handleClick }) {
+function Button({ text, handleClick, isMini }) {
 
     const backgroundColor = setBackgroundColor();
 
@@ -13,6 +13,7 @@ function Button({ text, handleClick }) {
             case BUTTON_TEXT.RESET:
                 return '#D7816A';
             case BUTTON_TEXT.INFO_PANEL:
+            case BUTTON_TEXT.CLOSE:
                 return '#2F6690';
             case BUTTON_TEXT.GET_MAZE:
                 return '#553739';
@@ -22,7 +23,7 @@ function Button({ text, handleClick }) {
 
     }
     return (
-        <button className="button" style={{background: `${backgroundColor}`}} onClick={() => handleClick()}>{text}</button>
+        <button className={"button " + (isMini ? 'button-mini' : 'button-normal')} style={{background: `${backgroundColor}`}} onClick={() => handleClick()}>{text}</button>
     )
 }
 

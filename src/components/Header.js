@@ -29,7 +29,7 @@ function Header() {
 
     return (
         <div className="header">
-            {isInfoPanelShown && <InfoPanel/>}
+            {isInfoPanelShown && <InfoPanel setIsInfoPanelShown={setIsInfoPanelShown}/>}
             <Button text={isSolved ? BUTTON_TEXT.CLEAR : BUTTON_TEXT.SOLVE} handleClick={() => completeMaze()}/>
             <Button text={BUTTON_TEXT.RESET} handleClick={() => resetMaze()}/>
             <Button text={BUTTON_TEXT.INFO_PANEL} handleClick={() => setIsInfoPanelShown(!isInfoPanelShown)}/>
