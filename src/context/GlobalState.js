@@ -15,6 +15,7 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
     const [isDragMode, setIsDragMode] = useState(false);
+    const [showNoSolutionPopup, setShowNoSolutionPopup] = useState(false);
 
     // Actions
     function clearMazeSolution() {
@@ -60,6 +61,8 @@ export const GlobalProvider = ({ children }) => {
         setIsRoute,
         restartMaze,
         setIsDragMode,
+        setShowNoSolutionPopup,
+        showNoSolutionPopup,
         isDragMode
     }}>
         {children}

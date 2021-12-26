@@ -6,4 +6,5 @@
     row-gap: 10px;
     justify-items: center;
     min-width: var(--min-app-width);
+    position: relative;
 }

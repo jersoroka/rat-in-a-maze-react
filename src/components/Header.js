@@ -7,18 +7,24 @@ import './Header.css';
 import InfoPanel from './InfoPanel';
 
 function Header() {
-    const { grid, restartMaze, setIsRoute, clearMazeSolution } = useContext(GlobalContext);
+    const { grid, restartMaze, setIsRoute, clearMazeSolution, setShowNoSolutionPopup } = useContext(GlobalContext);
 
     const [isInfoPanelShown, setIsInfoPanelShown] = useState(false);
     const [isSolved, setIsSolved] = useState(false);
 
-    function completeMaze() {
+    async function completeMaze() {
         if (isSolved) {
             clearMazeSolution();
             setIsSolved(false);
         } else {
-            solveMaze(grid, setIsRoute);
-            setIsSolved(true);
+            const solution = await solveMaze(grid, setIsRoute);
+            if (solution) {
+                setIsSolved(true);
+            } else {
+                clearMazeSolution();
+                setIsSolved(false);
+                setShowNoSolutionPopup(true);
+            }
         }
     }
 
