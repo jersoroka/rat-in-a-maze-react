@@ -1,5 +1,5 @@
 import { Square } from '../types';
-import {cloneDeep} from 'lodash';
+import {cloneDeep, unset} from 'lodash';
 import { timer } from '../context/Helpers';
 
 export function isValidPos(maze: Square[][], x: number, y: number): boolean {
@@ -36,7 +36,6 @@ export async function solveMazeHelper(maze: Square[][], x: number, y: number, so
 
 export async function solveMaze(maze: Square[][], setIsRoute: (pos: {row: number, column: number}, isRoute: boolean) => void): Promise<Square[][] | false> {
     let solMaze = cloneDeep(maze);
-
     if (!(await solveMazeHelper(maze, 0, 0, solMaze, setIsRoute))) {
         return false;
     };

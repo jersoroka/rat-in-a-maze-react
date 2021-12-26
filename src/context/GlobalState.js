@@ -16,6 +16,12 @@ export const GlobalProvider = ({ children }) => {
     const [isDragMode, setIsDragMode] = useState(false);
 
     // Actions
+    function clearMazeSolution() {
+        dispatch({
+            type: 'CLEAR_MAZE_SOLUTION'
+        })
+    }
+
     function restartMaze() {
         dispatch({
             type: 'RESTART_MAZE'
@@ -33,7 +39,7 @@ export const GlobalProvider = ({ children }) => {
         });
     };
 
-    async function setIsRoute(pos, isRoute) {
+    function setIsRoute(pos, isRoute) {
         const {row, column} = pos;
         dispatch({
             type: 'SET_IS_ROUTE',
@@ -43,12 +49,12 @@ export const GlobalProvider = ({ children }) => {
                 isRoute: isRoute
             }
         })
-        await timer();
     }
 
     return (
         <GlobalContext.Provider value={{
         grid: state.grid,
+        clearMazeSolution,
         setIsMazeWall,
         setIsRoute,
         restartMaze,

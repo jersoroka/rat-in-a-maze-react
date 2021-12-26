@@ -5,6 +5,13 @@ export default (state: any, action: any) => {
     let deepCopyState = cloneDeep(state);
     let square;
     switch (action.type) {
+        case 'CLEAR_MAZE_SOLUTION':
+            deepCopyState.grid.forEach((row: { isRoute: boolean | undefined; }[]) => {
+                row.forEach((square: { isRoute: undefined | boolean; }) => {
+                    square.isRoute = undefined;
+                })
+            })
+            return deepCopyState;
         case 'RESTART_MAZE':
             deepCopyState.grid = generateGrid(state.grid.length);
             return deepCopyState;

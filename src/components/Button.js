@@ -6,6 +6,7 @@ function Button({ text, handleClick }) {
 
     function setBackgroundColor() {
         switch (text) {
+            case 'CLEAR MAZE SOLUTION':
             case 'SOLVE':
                 return '#0EAD69';
             case 'RESET':
