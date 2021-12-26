@@ -7,6 +7,8 @@ import './Header.css';
 function Header() {
     const { grid, restartMaze, setIsRoute } = useContext(GlobalContext);
 
+    const [isInfoPanelShown, setIsInfoPanelShown] = useState(false);
+
     return (
         <div className="header">
             <Button text="SOLVE" handleClick={() => solveMaze(grid, setIsRoute)}/>
