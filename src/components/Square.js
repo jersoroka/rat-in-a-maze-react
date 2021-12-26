@@ -3,6 +3,7 @@ import './Square.css';
 import { GlobalContext } from '../context/GlobalState';
 import rat from '../images/rat.png';
 import cheese from '../images/cheese.png';
+import { findAdjacentRoutes } from './RouteHelpers';
 
 export default function Square({square}) {
     const { isMazeWall, isRoute, id, pos} = square;
@@ -32,47 +33,9 @@ export default function Square({square}) {
         }
     };
 
-    let squareColour = isMazeWall ? 'wall' : (isRoute ? 'solpath' : 'path');
+    let squareColour = isMazeWall ? 'wall' : 'path';
 
-    function findAdjacentRoutes() {
-        let isLeft = findIsLeft();
-        let isRight = findIsRight();
-        let isTop = findIsTop();
-        let isBottom = findIsBottom();
-
-        if (isTop && isBottom) return 'square-top-bottom';
-        if (isTop && isRight) return 'square-top-right';
-
-        if (isLeft && isRight) return 'square-left-right';
-        if (isLeft && isBottom) return 'square-left-bottom';
-
-        if (isTop) return 'square-top';
-        if (isBottom) return 'square-bottom';
-        if (isLeft) return 'square-left';
-        if (isRight) return 'square-right';
-    }
-
-    function findIsLeft() {
-        if (pos.column === 0) return false;
-        return isRoute && pos.column > 0 && pos.column < grid.length && grid[pos.row][pos.column - 1].isRoute;
-    }
-
-    function findIsRight() {
-        if (pos.column === grid.length - 1) return false;
-        return isRoute && pos.column >= 0 && pos.column < grid.length - 1 && grid[pos.row][pos.column + 1].isRoute;
-    }
-
-    function findIsTop() {
-        if (pos.row === 0) return false;
-        return isRoute && pos.row > 0 && pos.row <= grid.length - 1 && grid[pos.row - 1][pos.column].isRoute;
-    }
-
-    function findIsBottom() {
-        if (pos.row === grid.length - 1) return false;
-        return isRoute && pos.row >= 0 && pos.row < grid.length - 1 && grid[pos.row + 1][pos.column].isRoute;
-    }
-
-        const topRight = 
+    const topRight = 
         <div className='square-grid'>
             <div className='square-grid-top'/>
             <div className='square-grid-center square-grid-center-topRight-border'
@@ -87,7 +50,7 @@ export default function Square({square}) {
             <div className='square-grid-bottom'/>
         </div>
 
-    const adjacentRoute = findAdjacentRoutes();
+    const adjacentRoute = findAdjacentRoutes(pos, isRoute, grid);
     const block = setBlock();
 
     function setBlock() {
