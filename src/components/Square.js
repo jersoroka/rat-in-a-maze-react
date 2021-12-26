@@ -9,12 +9,13 @@ export default function Square({square}) {
     const { isMazeWall, isRoute, id, pos} = square;
     const { grid, setIsMazeWall, isDragMode, setIsDragMode } = useContext(GlobalContext);
     let mazeLength = ((1 / (grid.length)) * 100).toFixed(2) + '%';
+    let squareColour = isMazeWall ? 'wall' : 'path';
 
     function handleEvent(e) {
         switch (e.type) {
             case 'mousedown':
                 e.preventDefault();
-                if (id !== 1 && id !== (grid.length - 1)^2 && isDragMode) {
+                if (id !== 1 && id !== (grid.length - 1)^2) {
                     setIsMazeWall(pos);
                 }
                 setIsDragMode(true);
@@ -33,16 +34,14 @@ export default function Square({square}) {
         }
     };
 
-    let squareColour = isMazeWall ? 'wall' : 'path';
-
-    const topRight = 
+    const stylingForSquareWithTopAndRightNeighbours = 
         <div className='square-grid'>
             <div className='square-grid-top'/>
             <div className='square-grid-center square-grid-center-topRight-border'
                 style={{'border-bottom-left-radius': '10px'}}/>
             <div className='square-grid-right'/>
         </div>
-    const leftBottom = 
+    const stylingForSquareWithLeftAndBottomNeighbours = 
         <div className='square-grid'>
             <div className='square-grid-left'/>
             <div className='square-grid-center'
@@ -51,11 +50,11 @@ export default function Square({square}) {
         </div>
 
     const adjacentRoute = findAdjacentRoutes(pos, isRoute, grid);
-    const block = setBlock();
+    const squareWithRouteStyling = setSquareRouteStyling();
 
-    function setBlock() {
-        if (adjacentRoute === 'square-left-bottom') return leftBottom;
-        if (adjacentRoute === 'square-top-right') return topRight;
+    function setSquareRouteStyling() {
+        if (adjacentRoute === 'square-left-bottom') return stylingForSquareWithLeftAndBottomNeighbours;
+        if (adjacentRoute === 'square-top-right') return stylingForSquareWithTopAndRightNeighbours;
         if (pos.row === 0 && pos.column === 0) {
             return <img src={rat} className='square-image' alt="Rat"/>;
         }
@@ -74,7 +73,7 @@ export default function Square({square}) {
             onMouseUp={(e) => handleEvent(e)}
             onMouseOver={(e) => handleEvent(e)}
             >
-                {block}
+                {squareWithRouteStyling}
         </div>
     )
 }
