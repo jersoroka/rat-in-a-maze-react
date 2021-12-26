@@ -9,8 +9,10 @@ function Header() {
 
     return (
         <div className="header">
-            <Button text="SOLVE" handleClick={() => solveMaze(grid, setIsRoute)}></Button>
-            <Button text="RESET" handleClick={() => restartMaze()}></Button>
+            <Button text="SOLVE" handleClick={() => solveMaze(grid, setIsRoute)}/>
+            <Button text="RESET" handleClick={() => restartMaze()}/>
+            <Button text="THE RAT IN A MAZE PROBLEM"/>
+            <Button text="USE PRE-GENERATED MAZE"/>
         </div>
     )
 }

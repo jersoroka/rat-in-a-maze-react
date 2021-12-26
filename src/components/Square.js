@@ -13,7 +13,9 @@ export default function Square({square}) {
         switch (e.type) {
             case 'mousedown':
                 e.preventDefault();
-                setIsMazeWall(pos);
+                if (id !== 1 && id !== (grid.length - 1)^2 && isDragMode) {
+                    setIsMazeWall(pos);
+                }
                 setIsDragMode(true);
                 break;
             case 'mouseup':
@@ -21,7 +23,7 @@ export default function Square({square}) {
                 setIsDragMode(false);
                 break;
             case 'mouseover':
-                if (id !== 1 && isDragMode) {
+                if (id !== 1 && id !== (grid.length - 1)^2 && isDragMode) {
                     setIsMazeWall(pos);
                 }
                 break;
