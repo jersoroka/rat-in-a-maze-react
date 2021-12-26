@@ -2,6 +2,7 @@ import { solveMaze } from './MazeSolver';
 import { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import Button from './Button';
+import { BUTTON_TEXT } from '../constants/enums';
 import './Header.css';
 
 function Header() {
@@ -22,10 +23,10 @@ function Header() {
 
     return (
         <div className="header">
-            <Button text={isSolved ? 'CLEAR MAZE SOLUTION' : 'SOLVE'} handleClick={() => completeMaze()}/>
-            <Button text="RESET" handleClick={() => restartMaze()}/>
-            <Button text="THE RAT IN A MAZE PROBLEM"/>
-            <Button text="USE PRE-GENERATED MAZE"/>
+            <Button text={isSolved ? BUTTON_TEXT.CLEAR : BUTTON_TEXT.SOLVE} handleClick={() => completeMaze()}/>
+            <Button text={BUTTON_TEXT.RESET} handleClick={() => restartMaze()}/>
+            <Button text={BUTTON_TEXT.INFO_PANEL}/>
+            <Button text={BUTTON_TEXT.GET_MAZE}/>
         </div>
     )
 }

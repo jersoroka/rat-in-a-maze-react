@@ -1,4 +1,5 @@
 import './Button.css';
+import {BUTTON_TEXT} from '../constants/enums'
 
 function Button({ text, handleClick }) {
 
@@ -6,14 +7,14 @@ function Button({ text, handleClick }) {
 
     function setBackgroundColor() {
         switch (text) {
-            case 'CLEAR MAZE SOLUTION':
-            case 'SOLVE':
+            case BUTTON_TEXT.CLEAR:
+            case BUTTON_TEXT.SOLVE:
                 return '#0EAD69';
-            case 'RESET':
+            case BUTTON_TEXT.RESET:
                 return '#D7816A';
-            case 'THE RAT IN A MAZE PROBLEM':
+            case BUTTON_TEXT.INFO_PANEL:
                 return '#2F6690';
-            case 'USE PRE-GENERATED MAZE':
+            case BUTTON_TEXT.GET_MAZE:
                 return '#553739';
             default:
                 return '#2F6690';
