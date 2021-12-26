@@ -13,7 +13,7 @@ function Button({ text, handleClick }) {
             case 'THE RAT IN A MAZE PROBLEM':
                 return '#2F6690';
             case 'USE PRE-GENERATED MAZE':
-                return '#DCC656';
+                return '#553739';
             default:
                 return '#2F6690';
         }
