@@ -1,20 +1,7 @@
 .infopanel {
-    position: absolute;
-    z-index: 1;
     left: 50%;
     min-width: 100px;
-    width: 300px;
-    height: min-content;
-    background: var(--white);
-    box-shadow: 0px 0px 10px -1px black;
-    border-radius: 5px;
     outline: 5px solid var(--blue);
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
 }
 
 .infopanel>span {

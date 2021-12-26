@@ -4,7 +4,7 @@ import './InfoPanel.css';
 function InfoPanel({setIsInfoPanelShown}) {
 
     return (
-        <div className="infopanel">
+        <div className="popup infopanel">
             <h4>What is the Rat in a Maze Problem?</h4>
 
             <span>The Rat in a Maze problem is a popular problem that can be solved using a backtracking algorithm. The goal is to find a path in the maze from the rat to the cheese, given the following conditions:</span>

@@ -1,0 +1,20 @@
+.popup {
+    box-shadow: var(--popup-box-shadow);
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: min-content;
+    background: white;
+    width: 300px;
+    font-size: 14px;
+    position: absolute;
+    z-index: 1;
+}
+
+.popup>Button {
+    align-self: flex-end;
+    margin-right: 0px;
+}
