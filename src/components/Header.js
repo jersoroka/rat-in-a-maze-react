@@ -1,5 +1,5 @@
 import { solveMaze } from './MazeSolver';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import Button from './Button';
 import './Header.css';
