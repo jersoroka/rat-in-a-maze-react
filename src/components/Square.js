@@ -8,8 +8,6 @@ import { findAdjacentRoutes } from './RouteHelpers';
 export default function Square({square}) {
     const { isMazeWall, isRoute, id, pos} = square;
     const { grid, setIsMazeWall, isDragMode, setIsDragMode } = useContext(GlobalContext);
-    let mazeLength = ((1 / (grid.length)) * 100).toFixed(2) + '%';
-    let squareColour = isMazeWall ? 'wall' : 'path';
 
     function handleEvent(e) {
         switch (e.type) {
@@ -34,10 +32,11 @@ export default function Square({square}) {
         }
     };
 
+    let squarePathStyling = isMazeWall ? 'square-wall' : 'square-path';
     const stylingForSquareWithTopAndRightNeighbours = 
         <div className='square-grid'>
             <div className='square-grid-top'/>
-            <div className='square-grid-center square-grid-center-topRight-border'
+            <div className='square-grid-center'
                 style={{'border-bottom-left-radius': '10px'}}/>
             <div className='square-grid-right'/>
         </div>
@@ -48,27 +47,22 @@ export default function Square({square}) {
                 style={{'border-top-right-radius': '10px'}}/>
             <div className='square-grid-bottom'/>
         </div>
+    const ratStyling = <img src={rat} className='square-image' alt="Rat"/>;
+    const cheeseStyling = <img src={cheese} className='square-image' alt='Cheese'/>;
 
-    const adjacentRoute = findAdjacentRoutes(pos, isRoute, grid);
-    const squareWithRouteStyling = setSquareRouteStyling();
-
-    function setSquareRouteStyling() {
-        if (adjacentRoute === 'square-left-bottom') return stylingForSquareWithLeftAndBottomNeighbours;
-        if (adjacentRoute === 'square-top-right') return stylingForSquareWithTopAndRightNeighbours;
-        if (pos.row === 0 && pos.column === 0) {
-            return <img src={rat} className='square-image' alt="Rat"/>;
-        }
-        if (pos.row === grid.length - 1 && pos.column === grid.length - 1) {
-            return <img src={cheese} className='square-image' alt='Cheese'/>;
-        }
-        return <div className={`${adjacentRoute}`}/>;
+    function setSquareRouteStyling(styling) {
+        if (styling === 'square-left-bottom') return stylingForSquareWithLeftAndBottomNeighbours;
+        if (styling === 'square-top-right') return stylingForSquareWithTopAndRightNeighbours;
+        if (pos.row === 0 && pos.column === 0) return ratStyling;
+        if (pos.row === grid.length - 1 && pos.column === grid.length - 1) return cheeseStyling;
+        return <div className={`${styling}`}/>;
     }
+
+    const squareWithRouteStyling = setSquareRouteStyling(findAdjacentRoutes(pos, isRoute, grid));
 
     return (
         <div 
-            className={`square ${squareColour}`}
-            style={{width: mazeLength, 
-                    height: mazeLength}}
+            className={`square ${squarePathStyling}`}
             onMouseDown={(e) => handleEvent(e)}
             onMouseUp={(e) => handleEvent(e)}
             onMouseOver={(e) => handleEvent(e)}
