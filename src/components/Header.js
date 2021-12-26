@@ -4,6 +4,7 @@ import { GlobalContext } from '../context/GlobalState';
 import Button from './Button';
 import { BUTTON_TEXT } from '../constants/enums';
 import './Header.css';
+import InfoPanel from './InfoPanel';
 
 function Header() {
     const { grid, restartMaze, setIsRoute, clearMazeSolution } = useContext(GlobalContext);
@@ -28,9 +29,10 @@ function Header() {
 
     return (
         <div className="header">
+            {isInfoPanelShown && <InfoPanel/>}
             <Button text={isSolved ? BUTTON_TEXT.CLEAR : BUTTON_TEXT.SOLVE} handleClick={() => completeMaze()}/>
             <Button text={BUTTON_TEXT.RESET} handleClick={() => resetMaze()}/>
-            <Button text={BUTTON_TEXT.INFO_PANEL}/>
+            <Button text={BUTTON_TEXT.INFO_PANEL} handleClick={() => setIsInfoPanelShown(!isInfoPanelShown)}/>
             <Button text={BUTTON_TEXT.GET_MAZE}/>
         </div>
     )

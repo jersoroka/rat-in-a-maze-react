@@ -1,7 +1,9 @@
 .header {
-    position: absolute;
-    top: 0vh;
     width: var(--full-width);
-    display: flex;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    width: var(--full-width);
+    justify-items: center;
+    align-content: center;
+    min-width: var(--min-app-width);
 }

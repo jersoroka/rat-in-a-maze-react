@@ -20,7 +20,7 @@ export default (state: any, action: any) => {
             square = deepCopyState.grid[action.payload.row][action.payload.column];
             square.isRoute = action.payload.isRoute;
             return deepCopyState;
-        case DISPATCH.SET_IS_ROUTE:
+        case DISPATCH.SET_SQUARE_TYPE:
             square = deepCopyState.grid[action.payload.row][action.payload.column];
             square.isMazeWall = !square.isMazeWall
             return deepCopyState;

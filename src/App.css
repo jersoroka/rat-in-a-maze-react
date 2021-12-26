@@ -1,9 +1,9 @@
 .container {
     height: 90vh;
     width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
+    display: grid;
+    grid-template-rows: min-content auto;
+    row-gap: 10px;
+    justify-items: center;
+    min-width: var(--min-app-width);
 }

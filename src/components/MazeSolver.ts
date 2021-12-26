@@ -1,5 +1,5 @@
 import { Square } from '../types';
-import {cloneDeep, unset} from 'lodash';
+import {cloneDeep} from 'lodash';
 import { timer } from '../context/Helpers';
 
 export function isValidPos(maze: Square[][], x: number, y: number): boolean {

@@ -1,6 +1,4 @@
 .grid {
-    position: absolute;
-    top: 8vh;
     width: var(--full-width);
     height: var(--full-width);
     border: 1px solid var(--blue);
@@ -8,4 +6,5 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
+    min-width: 500px;
 }
