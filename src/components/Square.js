@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import './Square.css';
 import { GlobalContext } from '../context/GlobalState';
+import rat from '../images/rat.png';
+import cheese from '../images/cheese.png';
 
 export default function Square({square}) {
     const { isMazeWall, isRoute, id, pos} = square;
@@ -89,6 +91,12 @@ export default function Square({square}) {
     function setBlock() {
         if (adjacentRoute === 'square-left-bottom') return leftBottom;
         if (adjacentRoute === 'square-top-right') return topRight;
+        if (pos.row === 0 && pos.column === 0) {
+            return <img src={rat} className='square-image' alt="Rat"/>;
+        }
+        if (pos.row === grid.length - 1 && pos.column === grid.length - 1) {
+            return <img src={cheese} className='square-image' alt='Cheese'/>;
+        }
         return <div className={`${adjacentRoute}`}/>;
     }
 
