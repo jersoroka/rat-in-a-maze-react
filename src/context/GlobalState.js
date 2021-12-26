@@ -50,13 +50,20 @@ export const GlobalProvider = ({ children }) => {
                 column: column,
                 isRoute: isRoute
             }
-        })
+        });
+    }
+
+    function getPregeneratedMaze() {
+        dispatch({
+            type: DISPATCH.GET_PREGENERATED_MAZE
+        });
     }
 
     return (
         <GlobalContext.Provider value={{
         grid: state.grid,
         clearMazeSolution,
+        getPregeneratedMaze,
         setIsMazeWall,
         setIsRoute,
         restartMaze,

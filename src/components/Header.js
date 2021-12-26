@@ -7,7 +7,7 @@ import './Header.css';
 import InfoPanel from './InfoPanel';
 
 function Header() {
-    const { grid, restartMaze, setIsRoute, clearMazeSolution, setShowNoSolutionPopup } = useContext(GlobalContext);
+    const { getPregeneratedMaze, grid, restartMaze, setIsRoute, clearMazeSolution, setShowNoSolutionPopup } = useContext(GlobalContext);
 
     const [isInfoPanelShown, setIsInfoPanelShown] = useState(false);
     const [isSolved, setIsSolved] = useState(false);
@@ -33,13 +33,19 @@ function Header() {
         restartMaze();
     }
 
+    function getProvidedMaze() {
+        clearMazeSolution();
+        setIsSolved(false);
+        getPregeneratedMaze();
+    }
+
     return (
         <div className="header">
             {isInfoPanelShown && <InfoPanel setIsInfoPanelShown={setIsInfoPanelShown}/>}
             <Button text={isSolved ? BUTTON_TEXT.CLEAR : BUTTON_TEXT.SOLVE} handleClick={() => completeMaze()}/>
             <Button text={BUTTON_TEXT.RESET} handleClick={() => resetMaze()}/>
             <Button text={BUTTON_TEXT.INFO_PANEL} handleClick={() => setIsInfoPanelShown(!isInfoPanelShown)}/>
-            <Button text={BUTTON_TEXT.GET_MAZE}/>
+            <Button text={BUTTON_TEXT.GET_MAZE} handleClick={() => getProvidedMaze()}/>
         </div>
     )
 }

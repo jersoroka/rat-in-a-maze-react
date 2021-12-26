@@ -3,7 +3,7 @@ import './Square.css';
 import { GlobalContext } from '../context/GlobalState';
 import rat from '../images/rat.png';
 import cheese from '../images/cheese.png';
-import { findAdjacentRoutes } from './RouteHelpers';
+import { findAdjacentRoutes } from './SquareHelper';
 
 export default function Square({square}) {
     const { isMazeWall, isRoute, id, pos} = square;

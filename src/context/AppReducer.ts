@@ -1,6 +1,7 @@
 import {cloneDeep} from 'lodash';
 import { generateGrid } from './Helpers';
 import { DISPATCH } from '../constants/enums';
+import { preGeneratedMazes } from '../constants/mazes';
 
 export default (state: any, action: any) => {
     let deepCopyState = cloneDeep(state);
@@ -23,6 +24,9 @@ export default (state: any, action: any) => {
         case DISPATCH.SET_SQUARE_TYPE:
             square = deepCopyState.grid[action.payload.row][action.payload.column];
             square.isMazeWall = !square.isMazeWall
+            return deepCopyState;
+        case DISPATCH.GET_PREGENERATED_MAZE:
+            deepCopyState.grid = preGeneratedMazes[Math.floor(Math.random() * 3)];
             return deepCopyState;
         default:
             return state;
