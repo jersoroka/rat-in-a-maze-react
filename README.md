@@ -11,7 +11,7 @@
 </ul>
 
 <p align="center">
-<img src="./src/images/rat-in-a-maze.PNG" alt="project screenshot" width="40%" height=width/>
+<img src="./src/images/rat-in-a-maze.PNG" alt="project screenshot" width="60%" height=width/>
 </p>
 
 ### 🏠 [Demo](http://jersoroka.github.io/rat-in-a-maze-react)
