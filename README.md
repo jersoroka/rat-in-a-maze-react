@@ -9,6 +9,7 @@
   <li>I wrote this project in a mixture of JavaScript and TypeScript (I'm still learning TypeScript). I plan to get to a point where future projects will be completely TypeScript.</li>
   <li>I experimented with using the Context API and useReducer hook for state management.</li>
 </ul>
+<br>
 
 <p align="center">
 <img src="./src/images/rat-in-a-maze.PNG" alt="project screenshot" width="60%" height=width/>
