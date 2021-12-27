@@ -20,11 +20,14 @@
     "typescript": "^4.5.2",
     "web-vitals": "^1.0.1"
   },
+  "homepage": "http://jersoroka.github.io/rat-in-a-maze-react",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +49,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.177",
+    "gh-pages": "^3.2.3",
     "jasmine": "^3.10.0",
     "jest-jasmine2": "^27.4.5"
   }
