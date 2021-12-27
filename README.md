@@ -3,9 +3,14 @@
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> This is my project
+## Description
+<ul>
+  <li>This project is a visualization of the Rat in a Maze problem using React.</li>
+  <li>I wrote this project in a mixture of JavaScript and TypeScript (I'm still learning TypeScript). I plan to get to a point where future projects will be completely TypeScript.</li>
+  <li>I experimented with using the Context API and useReducer hook for state management.</li>
+</ul>
 
-### 🏠 [Homepage](http://jersoroka.github.io/rat-in-a-maze-react)
+### 🏠 [Demo](http://jersoroka.github.io/rat-in-a-maze-react)
 
 ## Install
 
