@@ -10,6 +10,10 @@
   <li>I experimented with using the Context API and useReducer hook for state management.</li>
 </ul>
 
+<p align="center">
+<img src="./src/images/rat-in-a-maze.PNG" alt="project screenshot" width="300" height="300"/>
+</p>
+
 ### 🏠 [Demo](http://jersoroka.github.io/rat-in-a-maze-react)
 
 ## Install
