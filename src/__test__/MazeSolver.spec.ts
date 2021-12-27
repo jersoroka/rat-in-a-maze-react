@@ -1,265 +1,61 @@
 import { cloneDeep } from 'lodash';
 import { isValidPos, solveMaze, solveMazeHelper } from '../components/MazeSolver';
 import { Square } from '../types';
+import { sampleMaze, sampleMazeSol, unsolvableMaze } from './testMazes';
 
 describe('Maze solver helper functions', () => {
-    const maze5x5: Square[][] = [
-        [
-            {id: 1, pos: {row: 0, column: 0}, isMazeWall: false},
-            {id: 2, pos: {row: 0, column: 1}, isMazeWall: false},
-            {id: 3, pos: {row: 0, column: 2}, isMazeWall: false},
-            {id: 4, pos: {row: 0, column: 3}, isMazeWall: false},
-            {id: 5, pos: {row: 0, column: 4}, isMazeWall: true}
-        ],
-        [
-            {id: 6, pos: {row: 1, column: 0}, isMazeWall: false},
-            {id: 7, pos: {row: 1, column: 1}, isMazeWall: true},
-            {id: 8, pos: {row: 1, column: 2}, isMazeWall: false},
-            {id: 9, pos: {row: 1, column: 3}, isMazeWall: true},
-            {id: 10, pos: {row: 1, column: 4}, isMazeWall: false}
-        ],
-        [
-            {id: 11, pos: {row: 2, column: 0}, isMazeWall: true},
-            {id: 12, pos: {row: 2, column: 1}, isMazeWall: true},
-            {id: 13, pos: {row: 2, column: 2}, isMazeWall: false},
-            {id: 14, pos: {row: 2, column: 3}, isMazeWall: false},
-            {id: 15, pos: {row: 2, column: 4}, isMazeWall: true}
-        ],
-        [
-            {id: 16, pos: {row: 3, column: 0}, isMazeWall: true},
-            {id: 17, pos: {row: 3, column: 1}, isMazeWall: true},
-            {id: 18, pos: {row: 3, column: 2}, isMazeWall: true},
-            {id: 19, pos: {row: 3, column: 3}, isMazeWall: false},
-            {id: 20, pos: {row: 3, column: 4}, isMazeWall: true}
-        ],
-        [
-            {id: 21, pos: {row: 4, column: 0}, isMazeWall: true},
-            {id: 22, pos: {row: 4, column: 1}, isMazeWall: false},
-            {id: 23, pos: {row: 4, column: 2}, isMazeWall: false},
-            {id: 24, pos: {row: 4, column: 3}, isMazeWall: false},
-            {id: 25, pos: {row: 4, column: 4}, isMazeWall: false}
-        ],
-    ]
+    let setIsRoute = jest.fn();
 
-    const initialSol5x5: Square[][] = [
-        [
-            {id: 1, pos: {row: 0, column: 0}, isMazeWall: false, isRoute: false},
-            {id: 2, pos: {row: 0, column: 1}, isMazeWall: false, isRoute: false},
-            {id: 3, pos: {row: 0, column: 2}, isMazeWall: false, isRoute: false},
-            {id: 4, pos: {row: 0, column: 3}, isMazeWall: false, isRoute: false},
-            {id: 5, pos: {row: 0, column: 4}, isMazeWall: true, isRoute: false}
-        ],
-        [
-            {id: 6, pos: {row: 1, column: 0}, isMazeWall: false, isRoute: false},
-            {id: 7, pos: {row: 1, column: 1}, isMazeWall: true, isRoute: false},
-            {id: 8, pos: {row: 1, column: 2}, isMazeWall: false, isRoute: false},
-            {id: 9, pos: {row: 1, column: 3}, isMazeWall: true, isRoute: false},
-            {id: 10, pos: {row: 1, column: 4}, isMazeWall: false, isRoute: false}
-        ],
-        [
-            {id: 11, pos: {row: 2, column: 0}, isMazeWall: true, isRoute: false},
-            {id: 12, pos: {row: 2, column: 1}, isMazeWall: true, isRoute: false},
-            {id: 13, pos: {row: 2, column: 2}, isMazeWall: false, isRoute: false},
-            {id: 14, pos: {row: 2, column: 3}, isMazeWall: false, isRoute: false},
-            {id: 15, pos: {row: 2, column: 4}, isMazeWall: true, isRoute: false}
-        ],
-        [
-            {id: 16, pos: {row: 3, column: 0}, isMazeWall: true, isRoute: false},
-            {id: 17, pos: {row: 3, column: 1}, isMazeWall: true, isRoute: false},
-            {id: 18, pos: {row: 3, column: 2}, isMazeWall: true, isRoute: false},
-            {id: 19, pos: {row: 3, column: 3}, isMazeWall: false, isRoute: false},
-            {id: 20, pos: {row: 3, column: 4}, isMazeWall: true, isRoute: false}
-        ],
-        [
-            {id: 21, pos: {row: 4, column: 0}, isMazeWall: true, isRoute: false},
-            {id: 22, pos: {row: 4, column: 1}, isMazeWall: false, isRoute: false},
-            {id: 23, pos: {row: 4, column: 2}, isMazeWall: false, isRoute: false},
-            {id: 24, pos: {row: 4, column: 3}, isMazeWall: false, isRoute: false},
-            {id: 25, pos: {row: 4, column: 4}, isMazeWall: false, isRoute: false}
-        ],
-    ]
-    
-    const maze5x5WithNoSol: Square[][] = [
-        [
-            {id: 1, pos: {row: 0, column: 0}, isMazeWall: true},
-            {id: 2, pos: {row: 0, column: 1}, isMazeWall: false},
-            {id: 3, pos: {row: 0, column: 2}, isMazeWall: false},
-            {id: 4, pos: {row: 0, column: 3}, isMazeWall: false},
-            {id: 5, pos: {row: 0, column: 4}, isMazeWall: false}
-        ],
-        [
-            {id: 6, pos: {row: 1, column: 0}, isMazeWall: true},
-            {id: 7, pos: {row: 1, column: 1}, isMazeWall: false},
-            {id: 8, pos: {row: 1, column: 2}, isMazeWall: false},
-            {id: 9, pos: {row: 1, column: 3}, isMazeWall: false},
-            {id: 10, pos: {row: 1, column: 4}, isMazeWall: false}
-        ],
-        [
-            {id: 11, pos: {row: 2, column: 0}, isMazeWall: true},
-            {id: 12, pos: {row: 2, column: 1}, isMazeWall: false},
-            {id: 13, pos: {row: 2, column: 2}, isMazeWall: false},
-            {id: 14, pos: {row: 2, column: 3}, isMazeWall: false},
-            {id: 15, pos: {row: 2, column: 4}, isMazeWall: false}
-        ],
-        [
-            {id: 16, pos: {row: 3, column: 0}, isMazeWall: true},
-            {id: 17, pos: {row: 3, column: 1}, isMazeWall: false},
-            {id: 18, pos: {row: 3, column: 2}, isMazeWall: false},
-            {id: 19, pos: {row: 3, column: 3}, isMazeWall: false},
-            {id: 20, pos: {row: 3, column: 4}, isMazeWall: false}
-        ],
-        [
-            {id: 21, pos: {row: 4, column: 0}, isMazeWall: true},
-            {id: 22, pos: {row: 4, column: 1}, isMazeWall: false},
-            {id: 23, pos: {row: 4, column: 2}, isMazeWall: false},
-            {id: 24, pos: {row: 4, column: 3}, isMazeWall: false},
-            {id: 25, pos: {row: 4, column: 4}, isMazeWall: false}
-        ],
-    ]
-
-    const solvedMaze5x5: Square[][] = [
-        [
-            {id: 1, pos: {row: 0, column: 0}, isMazeWall: false, isRoute: true},
-            {id: 2, pos: {row: 0, column: 1}, isMazeWall: false, isRoute: true},
-            {id: 3, pos: {row: 0, column: 2}, isMazeWall: false, isRoute: true},
-            {id: 4, pos: {row: 0, column: 3}, isMazeWall: false, isRoute: false},
-            {id: 5, pos: {row: 0, column: 4}, isMazeWall: true, isRoute: false}
-        ],
-        [
-            {id: 6, pos: {row: 1, column: 0}, isMazeWall: false, isRoute: false},
-            {id: 7, pos: {row: 1, column: 1}, isMazeWall: true, isRoute: false},
-            {id: 8, pos: {row: 1, column: 2}, isMazeWall: false, isRoute: true},
-            {id: 9, pos: {row: 1, column: 3}, isMazeWall: true, isRoute: false},
-            {id: 10, pos: {row: 1, column: 4}, isMazeWall: false, isRoute: false}
-        ],
-        [
-            {id: 11, pos: {row: 2, column: 0}, isMazeWall: true, isRoute: false},
-            {id: 12, pos: {row: 2, column: 1}, isMazeWall: true, isRoute: false},
-            {id: 13, pos: {row: 2, column: 2}, isMazeWall: false, isRoute: true},
-            {id: 14, pos: {row: 2, column: 3}, isMazeWall: false, isRoute: true},
-            {id: 15, pos: {row: 2, column: 4}, isMazeWall: true, isRoute: false}
-        ],
-        [
-            {id: 16, pos: {row: 3, column: 0}, isMazeWall: true, isRoute: false},
-            {id: 17, pos: {row: 3, column: 1}, isMazeWall: true, isRoute: false},
-            {id: 18, pos: {row: 3, column: 2}, isMazeWall: true, isRoute: false},
-            {id: 19, pos: {row: 3, column: 3}, isMazeWall: false, isRoute: true},
-            {id: 20, pos: {row: 3, column: 4}, isMazeWall: true, isRoute: false}
-        ],
-        [
-            {id: 21, pos: {row: 4, column: 0}, isMazeWall: true, isRoute: false},
-            {id: 22, pos: {row: 4, column: 1}, isMazeWall: false, isRoute: false},
-            {id: 23, pos: {row: 4, column: 2}, isMazeWall: false, isRoute: false},
-            {id: 24, pos: {row: 4, column: 3}, isMazeWall: false, isRoute: true},
-            {id: 25, pos: {row: 4, column: 4}, isMazeWall: false, isRoute: true}
-        ],
-    ]
-
-    const almostSol5x5: Square[][] = [
-        [
-            {id: 1, pos: {row: 0, column: 0}, isMazeWall: false, isRoute: true},
-            {id: 2, pos: {row: 0, column: 1}, isMazeWall: false, isRoute: true},
-            {id: 3, pos: {row: 0, column: 2}, isMazeWall: false, isRoute: true},
-            {id: 4, pos: {row: 0, column: 3}, isMazeWall: false, isRoute: false},
-            {id: 5, pos: {row: 0, column: 4}, isMazeWall: true, isRoute: false}
-        ],
-        [
-            {id: 6, pos: {row: 1, column: 0}, isMazeWall: false, isRoute: false},
-            {id: 7, pos: {row: 1, column: 1}, isMazeWall: true, isRoute: false},
-            {id: 8, pos: {row: 1, column: 2}, isMazeWall: false, isRoute: true},
-            {id: 9, pos: {row: 1, column: 3}, isMazeWall: true, isRoute: false},
-            {id: 10, pos: {row: 1, column: 4}, isMazeWall: false, isRoute: false}
-        ],
-        [
-            {id: 11, pos: {row: 2, column: 0}, isMazeWall: true, isRoute: false},
-            {id: 12, pos: {row: 2, column: 1}, isMazeWall: true, isRoute: false},
-            {id: 13, pos: {row: 2, column: 2}, isMazeWall: false, isRoute: true},
-            {id: 14, pos: {row: 2, column: 3}, isMazeWall: false, isRoute: true},
-            {id: 15, pos: {row: 2, column: 4}, isMazeWall: true, isRoute: false}
-        ],
-        [
-            {id: 16, pos: {row: 3, column: 0}, isMazeWall: true, isRoute: false},
-            {id: 17, pos: {row: 3, column: 1}, isMazeWall: true, isRoute: false},
-            {id: 18, pos: {row: 3, column: 2}, isMazeWall: true, isRoute: false},
-            {id: 19, pos: {row: 3, column: 3}, isMazeWall: false, isRoute: true},
-            {id: 20, pos: {row: 3, column: 4}, isMazeWall: true, isRoute: false}
-        ],
-        [
-            {id: 21, pos: {row: 4, column: 0}, isMazeWall: true, isRoute: false},
-            {id: 22, pos: {row: 4, column: 1}, isMazeWall: false, isRoute: false},
-            {id: 23, pos: {row: 4, column: 2}, isMazeWall: false, isRoute: false},
-            {id: 24, pos: {row: 4, column: 3}, isMazeWall: false, isRoute: false},
-            {id: 25, pos: {row: 4, column: 4}, isMazeWall: false, isRoute: false}
-        ],
-    ]
-
-
-    beforeAll(() => {
-    });
-
-    describe('isValidPos', () => { // fixed
+    describe('isValidPos', () => {
         it("should be true when (x, y) is at start or cheese", () => {
-            expect(isValidPos(maze5x5, 0, 0)).toBeTruthy();
-            expect(isValidPos(maze5x5, maze5x5.length - 1, maze5x5.length - 1)).toBeTruthy();
+            expect(isValidPos(sampleMaze, 0, 0)).toBeTruthy();
+            expect(isValidPos(sampleMaze, sampleMaze.length - 1, sampleMaze.length - 1)).toBeTruthy();
         });
 
         it("should be false when (x, y) is outside the maze", () => {
-            expect(isValidPos(maze5x5, -5, 0)).toBeFalsy();
-            expect(isValidPos(maze5x5, 0, -5)).toBeFalsy();
-            expect(isValidPos(maze5x5, maze5x5.length, 3)).toBeFalsy();
-            expect(isValidPos(maze5x5, 3, maze5x5.length)).toBeFalsy();
+            expect(isValidPos(sampleMaze, -5, 0)).toBeFalsy();
+            expect(isValidPos(sampleMaze, 0, -5)).toBeFalsy();
+            expect(isValidPos(sampleMaze, sampleMaze.length, 3)).toBeFalsy();
+            expect(isValidPos(sampleMaze, 3, sampleMaze.length)).toBeFalsy();
         });
 
         it("should be false when (x, y) is on a maze wall", () => {
-            expect(isValidPos(maze5x5, 0, 4)).toBeFalsy();
+            expect(isValidPos(sampleMaze, 0, 3)).toBeFalsy();
         });
     });
 
     describe('solveMazeHelper', () => {
-        let passedSol5x5: Square[][];
+        let mazeCopy: Square[][];
+        let initialSolMaze: Square[][];
 
         beforeEach(() => {
-            passedSol5x5 = cloneDeep(initialSol5x5);
+            mazeCopy = cloneDeep(sampleMaze);
+            initialSolMaze = cloneDeep(sampleMaze);
+        })
+
+        it("should return false when (x,y) is at an invalid position", async () => {
+            expect(await solveMazeHelper(mazeCopy, 0, 3, initialSolMaze, setIsRoute)).toBeFalsy();
         });
 
-        it("should be true when (x, y) is at the cheese and the solution maze should have one route at the cheese", () => {
-            let expectedSol5x5 = cloneDeep(initialSol5x5);
-            expectedSol5x5[4][4].isRoute = true;
-            expect(solveMazeHelper(maze5x5, maze5x5.length - 1, maze5x5.length - 1, passedSol5x5)).toBeTruthy();
-            expect(passedSol5x5).toEqual(expectedSol5x5);
+        it("should return false when (x, y) isRoute is false", async () => {
+            initialSolMaze[0][1].isRoute = false;
+            expect(await solveMazeHelper(mazeCopy, 0, 1, initialSolMaze, setIsRoute)).toBeFalsy();
+
         });
 
-        it("should be false when (x, y) is at an invalid position and the solution maze is unchanged", () => {
-            expect(solveMazeHelper(maze5x5, maze5x5.length - 1, maze5x5.length, passedSol5x5)).toBeFalsy();
-            expect(solveMazeHelper(maze5x5, maze5x5.length, maze5x5.length - 1, passedSol5x5)).toBeFalsy();
-            expect(solveMazeHelper(maze5x5, -1, 0, passedSol5x5)).toBeFalsy();
-            expect(solveMazeHelper(maze5x5, 0, -1, passedSol5x5)).toBeFalsy();
-            expect(passedSol5x5).toEqual(initialSol5x5);
-        });
-
-        it("should be true when there exists a solution from the current (x, y) and the solution maze is updated with a solution", () => {
-            expect(solveMazeHelper(maze5x5, 4, 3, almostSol5x5)).toBeTruthy();
-            expect(almostSol5x5).toEqual(solvedMaze5x5);
-        });
-
-        it("should be false when the maze is unsolvable and the solution maze only contains 0", () => {
-            expect(solveMazeHelper(maze5x5WithNoSol, 0, 0, passedSol5x5)).toBeFalsy();
-            expect(passedSol5x5).toEqual(initialSol5x5);
-        });
-
-        it("should be true when the maze is solvable and the only paths in the solution maze are ones that lead to the cheese", () => {
-            expect(solveMazeHelper(maze5x5, 0, 0, initialSol5x5)).toBeTruthy();
-            expect(initialSol5x5).toEqual(solvedMaze5x5);
+        it("should return true if the current (x, y) is valid and solve the maze", async () => {
+            expect(await solveMazeHelper(mazeCopy, 0, 0, initialSolMaze, setIsRoute)).toBeTruthy();
+            expect(initialSolMaze).toEqual(sampleMazeSol);
         });
     });
 
     describe('solveMaze', () => {
-        it('should return false if the maze is unsolvable', () => {
-            expect(solveMaze(maze5x5WithNoSol)).toBeFalsy();
+        it('should return false if the maze is unsolvable', async () => {
+            expect(await solveMaze(unsolvableMaze, setIsRoute)).toBeFalsy();
         });
 
-        it('should return a completed maze if solvable', () => {
-            expect(solveMaze(maze5x5)).toEqual(solvedMaze5x5);
+        it('should return a completed maze if solvable', async () => {
+            expect(await solveMaze(sampleMaze, setIsRoute)).toEqual(sampleMazeSol);
         });
     })
 })
